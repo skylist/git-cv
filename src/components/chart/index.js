@@ -23,7 +23,7 @@ const data = [
 
 const Chart = () => {
     return (
-        <div style={{ height: 168, width: '100%' }}>
+        <div className="chart responsive">
             <ResponsiveContainer>
                 <RadarChart data={data} >
                     <PolarGrid />

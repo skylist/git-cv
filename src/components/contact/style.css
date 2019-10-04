@@ -1,5 +1,5 @@
 @import "../../config/config.css";
-
+@import "./style-responsive.css";
 .import {
     text-align: left;
     color: var(--blue);

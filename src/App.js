@@ -8,7 +8,7 @@ import GitUserService from 'services/users'
 import ProjectInfo from 'components/project-info';
 import Contact from 'components/contact';
 
-import DataProcess from 'utils/graph-process-data'
+import PackageDescription from 'components/package-description'
 
 function App() {
 
@@ -48,7 +48,7 @@ function App() {
 	}
 
 	return (
-		<div className="container">
+		<div className="container responsive">
 			<aside className="side-bar">
 				<div className="header">
 					<div className="chart">
@@ -59,7 +59,7 @@ function App() {
 						<img
 							src={user.avatar_url || avatar}
 							alt={user.name}
-							className="avatar" />
+							className="avatar responsive" />
 					}
 				</div>
 				<div className="info-list">
@@ -96,7 +96,7 @@ function App() {
 					/>
 				</div>
 				<div className="bio">
-
+					<PackageDescription fullName="Matheus Pantoja Filgueira" age="22"/>
 				</div>
 			</aside>
 			<main className="content">

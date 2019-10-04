@@ -1,0 +1,17 @@
+@import "../../config/config.css";
+@import "./style-responsive.css";
+.package .label {
+    display: block;
+    background: var(--hover-black);
+    font-size: 16px;
+    margin-bottom: 16px;
+    padding: 2px 8px;
+}
+
+.package .key {
+    color: var(--blue);
+}
+
+.package .value {
+    color: var(--orange);
+}

@@ -1,0 +1,9 @@
+@media (max-width: 769px) {
+    #root .container.responsive{
+        display: block;
+        padding: 24px 8px 8px 8px;
+    }
+    .side-bar img.avatar.responsive {
+        width: 104px;
+    }
+}

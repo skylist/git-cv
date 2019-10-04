@@ -1,0 +1,10 @@
+.chart {
+    height: 168px;
+    width: 100%;
+}
+
+@media(max-width: 768px){
+    .responsive{
+        height: 100px;
+    }
+}
