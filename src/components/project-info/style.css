@@ -1,0 +1,69 @@
+@import "../../config/config.css";
+.project-container {
+    color: var(--white);
+    padding: 4px 8px;
+    border-left: 2px solid var(--gray);
+    margin: 8px 0;
+    background-position: left;
+    background-image: linear-gradient(to left, transparent, transparent 50%, var(--hover-black) 50%, var(--hover-black));
+    background-position: 100% 0;
+    background-size: 200% 100%;
+    transition: all 300ms ease-out;
+}
+
+.project-container:hover {
+    background-position: 0 0;
+    border-left: 2px solid var(--blue);
+}
+
+.project-container .header {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-container .header .more-info {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.project-container .header .stargazers-count {
+    display: inline-flex;
+    align-items: center;
+}
+
+.project-container .header .stargazers-count .count {
+    font-size: 18px;
+    margin: 0 8px;
+}
+
+.project-container .header .repo-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.project-container .header .repo-info .repo-language {
+    display: flex;
+    align-items: center;
+}
+
+.project-container .header .repo-info .repo-language .icon {
+    width: 24px;
+}
+
+.project-container .header .repo-info .repo-language .name {
+    margin: 0 8px;
+}
+
+.project-container .header .more-info .repo-link {
+    align-self: flex-end;
+    width: 32px;
+    height: 32px;
+    background: url('../../assets/icons/folder-github.svg')
+}
+
+.project-container .header .more-info .repo-link:active {
+    width: 32px;
+    height: 32px;
+    background: url('../../assets/icons/folder-github-open.svg')
+}

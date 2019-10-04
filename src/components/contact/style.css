@@ -1,0 +1,60 @@
+@import "../../config/config.css";
+
+.import {
+    text-align: left;
+    color: var(--blue);
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom: 4px;
+}
+
+.import:hover {
+    background: var(--hover-black);
+}
+
+.import a:target {
+    background: var(--hover-black);
+}
+
+.import a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+.import a:visited {
+    color: var(--blue);
+}
+
+.import strong {
+    font-size: 16px;
+    color: var(--pink);
+}
+
+.import strong.tab {
+    margin-left: 20px;
+}
+
+span.tooltip:hover::before {
+    padding: 4px;
+    font-size: 12px;
+    transform: translateY(-115%);
+    width: 450px;
+    content: attr(aria-label);
+    position: absolute;
+    display: inline-block;
+    z-index: 1;
+    color: var(--white);
+    background: var(--hover-black);
+}
+
+span.tooltip:hover::after {
+    content: ' ';
+    transform: translate(-368px, 70%);
+    position: absolute;
+    display: inline-block;
+    z-index: 1;
+    margin: -20px 0 0 0;
+    border-width: 8px;
+    border-style: solid;
+    border-color: var(--hover-black) transparent transparent transparent;
+}
