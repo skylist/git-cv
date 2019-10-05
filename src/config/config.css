@@ -9,6 +9,7 @@
   --hover-black: rgb(40, 40, 40);
   --white: #fff;
   --gray: rgb(80, 80, 80);
+  --light-gray: rgb(150, 150, 150);
 }
 
 *::-webkit-scrollbar {

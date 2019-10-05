@@ -1,5 +1,4 @@
 import React from 'react';
-import { array, string } from 'prop-types';
 import "components/package-description/style.css"
 
 const PackageDescription = ({ fullName, age, scripts, devDependecies }) => {

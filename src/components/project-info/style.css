@@ -36,6 +36,11 @@
     margin: 0 8px;
 }
 
+.project-container .header .repo-info .created-at{
+    color: var(--light-gray);
+    font-size: 12px;
+}
+
 .project-container .header .repo-info {
     display: flex;
     align-items: center;

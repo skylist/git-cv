@@ -7,19 +7,28 @@ import GitReposService from 'services/repos'
 import GitUserService from 'services/users'
 import ProjectInfo from 'components/project-info';
 import Contact from 'components/contact';
-
 import PackageDescription from 'components/package-description'
 
 function App() {
 
+	// #region Variables
 	const [repos, setRepos] = useState([])
 	const [user, setUser] = useState({})
+	// #endregion
 
+	// #region Fetch data
 	useEffect(() => {
 		const findUser = async () => {
-			const { data } = await GitUserService.findUser(process.env.REACT_APP_USERNAME)
+			let { data } = await GitUserService.findUser(process.env.REACT_APP_USERNAME)
+			const { data: { info_contacts, skill_level } } = await GitReposService.getArchive(process.env.REACT_APP_USERNAME)
+
+			data = {
+				...data,
+				name: data.name.split(' ').reverse().join('/'),
+				info_contacts,
+				skill_level
+			}
 			setUser(data)
-			console.log(data)
 		}
 		findUser()
 	}, [])
@@ -28,12 +37,12 @@ function App() {
 		const getRepoList = async () => {
 			const { data } = await GitReposService.listRepos(process.env.REACT_APP_USERNAME)
 			setRepos(data)
-
-			//console.log(await DataProcess.graphData())
 		}
 		getRepoList()
 	}, [])
+	// #endregion
 
+	// #region Render project
 	const renderProject = ({ language, full_name, created_at, html_url, id, stargazers_count }) => {
 		return (
 			<ProjectInfo
@@ -46,65 +55,69 @@ function App() {
 			/>
 		)
 	}
+	// #endregion
+
+	// #region Render Contanct
+	const renderContact = ({ label, from, link }, index) => {
+		return <Contact
+			key={`${index}-${link}`}
+			label={label}
+			from={from}
+			href={link}
+		/>
+	}
+	// #endregion
 
 	return (
 		<div className="container responsive">
-			<aside className="side-bar">
-				<div className="header">
-					<div className="chart">
-						<Chart />
-					</div>
-					{
-						user &&
-						<img
-							src={user.avatar_url || avatar}
-							alt={user.name}
-							className="avatar responsive" />
-					}
-				</div>
-				<div className="info-list">
-					{/* <span className="index">
-						src > index.js
-					</span> */}
-
-					<Contact
-						name
-						label="SkyList"
-						from="Pantoja/Matheus"
-						ariaLabel="Hello, I’m Matheus. I’m a developer living in São Paulo, SP, Brasil. I am a fan of Code and music. I’m also interested in cats and video games."
-						href=""
-					/>
-					<Contact
-						label="LinkedIn"
-						from="Linkedin.com"
-						href="https://www.linkedin.com/in/matheus-pantoja/"
-					/>
-					<Contact
-						label="About"
-						from="About.me"
-						href="https://about.me/matheuspantoja"
-					/>
-					<Contact
-						label="Style"
-						from="Instagram.com"
-						href="https://instagram.com/matheuspantoja"
-					/>
-					<Contact
-						label="Mail"
-						from="Gmail.com"
-						href="mailto:matheus.pantoja97@gmail.com"
-					/>
-				</div>
-				<div className="bio">
-					<PackageDescription fullName="Matheus Pantoja Filgueira" age="22"/>
-				</div>
-			</aside>
-			<main className="content">
-				{
-					repos.length !== 0 &&
-					repos.map(renderProject)
-				}
-			</main>
+			{
+				user ?
+					<>
+						<aside className="side-bar">
+							<div className="header">
+								<div className="chart">
+									<Chart data={user.skill_level} />
+								</div>
+								{
+									user &&
+									<a href={user.html_url}>
+										<img
+											src={user.avatar_url || avatar}
+											alt={user.name}
+											className="avatar responsive" />
+									</a>
+								}
+							</div>
+							{
+								user &&
+								<div className="info-list">
+									<Contact
+										name
+										label={user.login}
+										from={user.name}
+										ariaLabel={user.bio}
+										href=""
+									/>
+									{
+										user.info_contacts &&
+										user.info_contacts.map(renderContact)
+									}
+								</div>
+							}
+							<div className="bio">
+								<PackageDescription fullName="Matheus Pantoja Filgueira" age="22" />
+							</div>
+						</aside>
+						<main className="content">
+							{
+								repos.length !== 0
+									? repos.map(renderProject)
+									: <span className="loader green" data-color='#ccc'></span>
+							}
+						</main>
+					</>
+					: <span className="loader"></span>
+			}
 		</div>
 	);
 }
